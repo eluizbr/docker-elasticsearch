@@ -64,11 +64,11 @@ services:
       - ./elastic-DB:/usr/share/elasticsearch/data
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./certs:/usr/share/elasticsearch/config/certs
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.elastic.rule=Host(`elastic.eluizbr.dev`)"
-      - "traefik.http.routers.elastic.entrypoints=websecure"
-      - "traefik.http.routers.elastic.tls.certresolver=myhttpchallenge"
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.elastic.rule=Host(`elastic.eluizbr.dev`)"
+    #   - "traefik.http.routers.elastic.entrypoints=websecure"
+    #   - "traefik.http.routers.elastic.tls.certresolver=myhttpchallenge"
     networks:
       - backends
 networks:
