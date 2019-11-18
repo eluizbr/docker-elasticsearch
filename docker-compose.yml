@@ -1,54 +1,54 @@
 version: "3.7"
 services:
-  # proxy:
-  #   container_name: proxy
-  #   image: traefik
-  #   command:
-  #     - "--log.level=INFO"
-  #     - "--api.insecure=true"
-  #     - "--providers.docker=true"
-  #     - "--providers.docker.exposedbydefault=false"
-  #     - "--entrypoints.web.address=:80"
-  #     - "--entrypoints.websecure.address=:443"
-  #     - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge=true"
-  #     - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge.entrypoint=web"
-  #     - "--certificatesresolvers.mytlschallenge.acme.email=eluizbr@gmail.com"
-  #     - "--certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json"
-  #   restart: always 
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #     - "8080:8080"
-  #   volumes:
-  #     - "/var/run/docker.sock:/var/run/docker.sock:ro"
-  #     - "/root/letsencrypt:/letsencrypt"
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.proxy.rule=Host(`monitor.eluizbr.dev`)"
-  #     - "traefik.http.services.proxy.loadbalancer.server.port=8080"
-  #     - "traefik.http.routers.proxy.entrypoints=websecure"
-  #     - "traefik.http.routers.proxy.tls.certresolver=myhttpchallenge"
-  #   networks:
-  #     - backends
-  # kibana:
-  #   image: kibana:7.4.2
-  #   restart: always
-  #   expose:
-  #     - 5601
-  #   ports:
-  #     - 5601:5601
-  #   environment:
-  #     - elasticsearch.username=kibana
-  #     - elasticsearch.password=Nz0BxFDiPr2lec9goXY5
-  #   volumes:
-  #     - ./kibana.yml:/usr/share/kibana/config/kibana.yml 
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.kibana.rule=Host(`kibana.eluizbr.dev`)"
-  #     - "traefik.http.routers.kibana.entrypoints=websecure"
-  #     - "traefik.http.routers.kibana.tls.certresolver=myhttpchallenge"
-  #   networks:
-  #     - backends
+  proxy:
+    container_name: proxy
+    image: traefik
+    command:
+      - "--log.level=INFO"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge=true"
+      - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.mytlschallenge.acme.email=eluizbr@gmail.com"
+      - "--certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json"
+    restart: always 
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/root/letsencrypt:/letsencrypt"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.proxy.rule=Host(`monitor.eluizbr.dev`)"
+      - "traefik.http.services.proxy.loadbalancer.server.port=8080"
+      - "traefik.http.routers.proxy.entrypoints=websecure"
+      - "traefik.http.routers.proxy.tls.certresolver=myhttpchallenge"
+    networks:
+      - backends
+  kibana:
+    image: kibana:7.4.2
+    restart: always
+    expose:
+      - 5601
+    ports:
+      - 5601:5601
+    environment:
+      - elasticsearch.username=kibana
+      - elasticsearch.password=Nz0BxFDiPr2lec9goXY5
+    volumes:
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml 
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kibana.rule=Host(`kibana.eluizbr.dev`)"
+      - "traefik.http.routers.kibana.entrypoints=websecure"
+      - "traefik.http.routers.kibana.tls.certresolver=myhttpchallenge"
+    networks:
+      - backends
   elastic:
     image: elasticsearch:7.4.2
     restart: always
@@ -64,11 +64,11 @@ services:
       - ./elastic-DB:/usr/share/elasticsearch/data
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./certs:/usr/share/elasticsearch/config/certs
-    # labels:
-    #   - "traefik.enable=true"
-    #   - "traefik.http.routers.elastic.rule=Host(`elastic.eluizbr.dev`)"
-    #   - "traefik.http.routers.elastic.entrypoints=websecure"
-    #   - "traefik.http.routers.elastic.tls.certresolver=myhttpchallenge"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.elastic.rule=Host(`elastic.eluizbr.dev`)"
+      - "traefik.http.routers.elastic.entrypoints=websecure"
+      - "traefik.http.routers.elastic.tls.certresolver=myhttpchallenge"
     networks:
       - backends
 networks:
