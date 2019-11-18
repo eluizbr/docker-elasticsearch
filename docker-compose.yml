@@ -49,7 +49,7 @@ services:
       - "traefik.http.routers.kibana.tls.certresolver=myhttpchallenge"
     networks:
       - backends
-  elasticsearch:
+  elastic:
     image: elasticsearch:7.4.2
     restart: always
     expose:
