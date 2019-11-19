@@ -50,7 +50,8 @@ services:
     image: docker.elastic.co/apm/apm-server:7.4.2
     restart: always
     volumes:
-      - ./apm-server.yml:/usr/share/apm-server/apm-server.ym
+      - ./apm-server-data:/usr/share/apm-server/data
+      - ./apm-server.yml:/usr/share/apm-server/apm-server.yml
     # labels:
     #   - "traefik.enable=false"
     networks:
