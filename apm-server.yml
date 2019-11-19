@@ -6,7 +6,7 @@ apm-server:
   # Defines the host and port the server is listening on. Use "unix:/path/to.sock" to listen on a unix domain socket.
   host: "0.0.0.0:8200"
   rum:
-    #enabled: false
+    enabled: true
 
     event_rate:
 
@@ -76,13 +76,13 @@ output.elasticsearch:
   # In case you specify and additional path, the scheme is required: `http://localhost:9200/path`.
   # IPv6 addresses should always be defined as: `https://[2001:db8::1]:9200`.
   hosts: ["elastic:9200"]
-  # secret_token: '123456789'
+  secret_token: '123456789'
 
   # Boolean flag to enable or disable the output module.
   #enabled: true
 
   # Set gzip compression level.
-  #compression_level: 0
+  compression_level: 5
 
   # Optional protocol and basic auth credentials.
   #protocol: "https"
