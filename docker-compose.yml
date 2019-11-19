@@ -57,7 +57,10 @@ services:
       - ./apm-server-data:/usr/share/apm-server/data
       - ./apm-server.yml:/usr/share/apm-server/apm-server.yml
     labels:
-      - "traefik.enable=false"
+      - "traefik.enable=true"
+      - "traefik.http.routers.apm.rule=Host(`apm.vp6.com.br`)"
+      - "traefik.http.routers.apm.entrypoints=websecure"
+      - "traefik.http.routers.apm.tls.certresolver=myhttpchallenge"
     networks:
       - backends
   elastic:
