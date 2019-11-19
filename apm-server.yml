@@ -2,9 +2,9 @@
 
 ################################ APM Server ################################
 
-apm-server:
-  # Defines the host and port the server is listening on. Use "unix:/path/to.sock" to listen on a unix domain socket.
-  host: "0.0.0.0:8200"
+# apm-server:
+#   # Defines the host and port the server is listening on. Use "unix:/path/to.sock" to listen on a unix domain socket.
+#   host: "0.0.0.0:8200"
 #-------------------------- Elasticsearch output --------------------------
 output.elasticsearch:
   # Array of hosts to connect to.
@@ -21,5 +21,5 @@ output.elasticsearch:
 
   # Optional protocol and basic auth credentials.
   #protocol: "https"
-  username: "apm_system"
-  password: "YO6lcedYuWX4y0CzORfm"
+  username: 'apm_system'
+  password: 'YO6lcedYuWX4y0CzORfm'
