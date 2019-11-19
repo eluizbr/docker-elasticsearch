@@ -12,18 +12,19 @@ services:
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge=true"
       - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.mytlschallenge.acme.email=eluizbr@gmail.com"
-      - "--certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.myhttpchallenge.acme.email=eluizbr@gmail.com"
+      - "--certificatesresolvers.myhttpchallenge.acme.storage=/letsencrypt/acme.json"
     restart: always 
     ports:
       - "80:80"
       - "443:443"
       - "8080:8080"
     volumes:
+      - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.proxy.rule=Host(`monitor.eluizbr.dev`)"
+      - "traefik.http.routers.proxy.rule=Host(`monitor.vp6.com.br`)"
       - "traefik.http.services.proxy.loadbalancer.server.port=8080"
       - "traefik.http.routers.proxy.entrypoints=websecure"
       - "traefik.http.routers.proxy.tls.certresolver=myhttpchallenge"
@@ -40,7 +41,7 @@ services:
       - ./kibana.yml:/usr/share/kibana/config/kibana.yml 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.kibana.rule=Host(`kibana.eluizbr.dev`)"
+      - "traefik.http.routers.kibana.rule=Host(`kibana.vp6.com.br`)"
       - "traefik.http.routers.kibana.entrypoints=websecure"
       - "traefik.http.routers.kibana.tls.certresolver=myhttpchallenge"
     networks:
@@ -62,11 +63,30 @@ services:
       - ./certs:/usr/share/elasticsearch/config/certs
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.elastic.rule=Host(`elastic.eluizbr.dev`)"
+      - "traefik.http.routers.elastic.rule=Host(`elastic.vp6.com.br`)"
       - "traefik.http.routers.elastic.entrypoints=websecure"
       - "traefik.http.routers.elastic.tls.certresolver=myhttpchallenge"
     networks:
       - backends
+  rabbitmq:
+    container_name: rabbitmq
+    build:
+      context: .
+      dockerfile: docker/rabbitmq/Dockerfile
+    ports:
+      - "8081:15672"
+      - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: vp62018
+      RABBITMQ_DEFAULT_VHOST: "/"
+      RABBITMQ_VM_MEMORY_HIGH_WATERMARK: 1.0
+    volumes:
+      - ./.rabbitmq:/var/lib/rabbitmq
+    labels:
+      - "traefik.enable=false"      
+    networks:
+      - backends      
 networks:
   backends:
     name: custom_backend_networks
