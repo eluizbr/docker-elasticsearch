@@ -1,7 +1,7 @@
 version: "3.7"
 services:
-  proxy:
-    container_name: proxy
+  traefik:
+    container_name: traefik
     image: traefik
     command:
       - "--log.level=INFO"
@@ -24,10 +24,10 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.proxy.rule=Host(`monitor.vp6.com.br`)"
-      - "traefik.http.services.proxy.loadbalancer.server.port=8080"
-      - "traefik.http.routers.proxy.entrypoints=websecure"
-      - "traefik.http.routers.proxy.tls.certresolver=myhttpchallenge"
+      - "traefik.http.routers.traefik.rule=Host(`monitor.vp6.com.br`)"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=myhttpchallenge"
     networks:
       - backends
   kibana:
