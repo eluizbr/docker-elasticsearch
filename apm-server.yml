@@ -1,0 +1,4 @@
+output.elasticsearch:
+  hosts: ["http://elastic:9200"]
+  username: 'apm_system'
+  password: 'D9AQWGTVkdAhZsTi6MjH'

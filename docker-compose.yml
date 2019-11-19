@@ -46,6 +46,15 @@ services:
       - "traefik.http.routers.kibana.tls.certresolver=myhttpchallenge"
     networks:
       - backends
+  apm:
+    image: apm:7.4.2
+    restart: always
+    volumes:
+      - ./apm-server.yml:/usr/share/apm-server/config/apm-server.yml 
+    labels:
+      - "traefik.enable=false"
+    networks:
+      - backends
   elastic:
     image: elasticsearch:7.4.2
     restart: always
