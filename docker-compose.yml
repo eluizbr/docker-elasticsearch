@@ -68,25 +68,25 @@ services:
       - "traefik.http.routers.elastic.tls.certresolver=myhttpchallenge"
     networks:
       - backends
-  rabbitmq:
-    container_name: rabbitmq
-    build:
-      context: .
-      dockerfile: docker/rabbitmq/Dockerfile
-    ports:
-      - "8081:15672"
-      - "5672:5672"
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: vp62018
-      RABBITMQ_DEFAULT_VHOST: "/"
-      RABBITMQ_VM_MEMORY_HIGH_WATERMARK: 1.0
-    volumes:
-      - ./.rabbitmq:/var/lib/rabbitmq
-    labels:
-      - "traefik.enable=false"      
-    networks:
-      - backends      
+  # rabbitmq:
+  #   container_name: rabbitmq
+  #   build:
+  #     context: .
+  #     dockerfile: docker/rabbitmq/Dockerfile
+  #   ports:
+  #     - "8081:15672"
+  #     - "5672:5672"
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: admin
+  #     RABBITMQ_DEFAULT_PASS: vp62018
+  #     RABBITMQ_DEFAULT_VHOST: "/"
+  #     RABBITMQ_VM_MEMORY_HIGH_WATERMARK: 1.0
+  #   volumes:
+  #     - ./.rabbitmq:/var/lib/rabbitmq
+  #   labels:
+  #     - "traefik.enable=false"      
+  #   networks:
+  #     - backends      
 networks:
   backends:
     name: custom_backend_networks
