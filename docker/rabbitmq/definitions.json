@@ -1,7 +1,31 @@
 {
+    "users": [
+        {
+            "name": "admin",
+            "password_hash": "vp62018",
+            "tags": "administrator"
+        }
+    ],
     "vhosts": [
         {
-            "name": "/vp6"
+            "name": "vhost1"
+        },
+        {
+            "name": "vhost2"
         }
-    ]
+    ],
+    "permissions": [
+        {
+            "user": "admin",
+            "vhost": "vhost1",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "parameters": [],
+    "policies": [],
+    "queues": [],
+    "exchanges": [],
+    "bindings": []
 }
