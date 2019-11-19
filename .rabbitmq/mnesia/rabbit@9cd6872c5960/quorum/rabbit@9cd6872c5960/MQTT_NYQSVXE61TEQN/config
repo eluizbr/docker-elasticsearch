@@ -1,7 +1,0 @@
-#{await_condition_timeout => 30000,broadcast_time => 100,
-  cluster_name => mqtt_node,friendly_name => mqtt_node,
-  id => {mqtt_node,rabbit@9cd6872c5960},
-  initial_members => [],
-  log_init_args => #{uid => <<"MQTT_NYQSVXE61TEQN">>},
-  machine => {module,mqtt_machine,#{}},
-  tick_timeout => 65,uid => <<"MQTT_NYQSVXE61TEQN">>}.
