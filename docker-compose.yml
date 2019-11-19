@@ -30,36 +30,36 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=myhttpchallenge"
     networks:
       - backends
-  kibana:
-    image: kibana:7.4.2
-    restart: always
-    expose:
-      - 5601
-    ports:
-      - 5601:5601
-    volumes:
-      - ./kibana.yml:/usr/share/kibana/config/kibana.yml 
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.kibana.rule=Host(`kibana.vp6.com.br`)"
-      - "traefik.http.routers.kibana.entrypoints=websecure"
-      - "traefik.http.routers.kibana.tls.certresolver=myhttpchallenge"
-    networks:
-      - backends
-  apm:
-    image: docker.elastic.co/apm/apm-server:7.4.2
-    restart: always
-    expose:
-      - 8200
-    ports:
-      - "8200:8200"   
-    volumes:
-      - ./apm-server-data:/usr/share/apm-server/data
-      - ./apm-server.yml:/usr/share/apm-server/apm-server.yml
-    labels:
-      - "traefik.enable=false"
-    networks:
-      - backends
+  # kibana:
+  #   image: kibana:7.4.2
+  #   restart: always
+  #   expose:
+  #     - 5601
+  #   ports:
+  #     - 5601:5601
+  #   volumes:
+  #     - ./kibana.yml:/usr/share/kibana/config/kibana.yml 
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.kibana.rule=Host(`kibana.vp6.com.br`)"
+  #     - "traefik.http.routers.kibana.entrypoints=websecure"
+  #     - "traefik.http.routers.kibana.tls.certresolver=myhttpchallenge"
+  #   networks:
+  #     - backends
+  # apm:
+  #   image: docker.elastic.co/apm/apm-server:7.4.2
+  #   restart: always
+  #   expose:
+  #     - 8200
+  #   ports:
+  #     - "8200:8200"   
+  #   volumes:
+  #     - ./apm-server-data:/usr/share/apm-server/data
+  #     - ./apm-server.yml:/usr/share/apm-server/apm-server.yml
+  #   labels:
+  #     - "traefik.enable=false"
+  #   networks:
+  #     - backends
   elastic:
     image: elasticsearch:7.4.2
     restart: always
