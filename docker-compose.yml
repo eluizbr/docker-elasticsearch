@@ -49,6 +49,10 @@ services:
   apm:
     image: docker.elastic.co/apm/apm-server:7.4.2
     restart: always
+    expose:
+      - 8200
+    ports:
+      - "8200:8200"   
     volumes:
       - ./apm-server-data:/usr/share/apm-server/data
       - ./apm-server.yml:/usr/share/apm-server/apm-server.yml
