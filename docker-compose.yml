@@ -59,6 +59,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.apm.rule=Host(`apm.vp6.com.br`)"
+      - "traefik.http.services.apm.loadbalancer.server.port=8200"
       - "traefik.http.routers.apm.entrypoints=websecure"
       - "traefik.http.routers.apm.tls.certresolver=myhttpchallenge"
     networks:
